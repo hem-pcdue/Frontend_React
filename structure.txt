@@ -1,0 +1,18 @@
+report-generator-ui/
+├── public/
+│   ├── index.html
+│   └── ... (other public assets)
+├── src/
+│   ├── api/
+│   │   └── reportService.js      # Handles the API call logic
+│   ├── assets/
+│   │   └── logo.png              # Place your SFRE logo here
+│   ├── components/
+│   │   ├── ReportGenerator.js    # The main component with the form
+│   │   └── ReportGenerator.css   # Styles for the component
+│   ├── App.js                    # Main app component
+│   ├── App.css                   # Global styles
+│   └── index.js                  # Entry point
+├── .env                          # Environment variables for React
+├── package.json
+└── README.md
