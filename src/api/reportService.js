@@ -8,16 +8,21 @@ const API_URL = `${process.env.REACT_APP_API_BASE_URL}/api/generate-report`;
  * Uploads files to the backend and initiates report generation.
  * @param {File} docxFile - The .docx template file.
  * @param {File[]} jsonFiles - An array of .json specification files.
- * @param {File} excelFile - The .xlsx project data file.
+ * @param {File[]} excelFiles - An array of .xlsx project data files.
  * @returns {Promise<Blob>} A promise that resolves with the generated report file as a Blob.
  */
-export const generateReport = async (docxFile, jsonFiles, excelFile) => {
+export const generateReport = async (docxFile, jsonFiles, excelFiles) => {
   const formData = new FormData();
 
   // The backend code iterates through all files, so the keys don't have to be unique,
   // but giving them descriptive names is good practice.
   formData.append('template', docxFile, docxFile.name);
-  formData.append('data', excelFile, excelFile.name);
+
+  // Append all Excel data files
+  excelFiles.forEach((file, index) => {
+    formData.append(`data_${index}`, file, file.name);
+  });
+  
   jsonFiles.forEach((file, index) => {
     formData.append(`spec_${index}`, file, file.name);
   });
